@@ -30,26 +30,26 @@ class Blog implements JsonApiResource
     /**
      * @var User
      *
-     * @Assert\NotNull()
      * @ORM\ManyToOne(targetEntity="User", inversedBy="blogs")
      * @ORM\JoinColumn(name="user_id", nullable=false)
      */
+    #[Assert\NotNull]
     protected $user;
 
     /**
      * @var string
      *
-     * @Assert\NotNull()
      * @ORM\Column(name="title", type="string", length=255, nullable=false)
      */
+    #[Assert\NotNull]
     protected $title;
 
     /**
      * @var string
      *
-     * @Assert\NotNull()
      * @ORM\Column(name="content", type="text", nullable=true)
      */
+    #[Assert\NotNull]
     protected $content;
 
     /**

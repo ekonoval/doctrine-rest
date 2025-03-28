@@ -27,17 +27,17 @@ class User implements JsonApiResource
      * @var string
      *
      * @ORM\Column(name="email", type="string", unique=true, nullable=false)
-     * @Assert\Email()
-     * @Assert\NotNull()
      */
+    #[Assert\Email]
+    #[Assert\NotNull]
     protected $email;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     * @Assert\NotNull()
      */
+    #[Assert\NotNull]
     protected $name;
 
     /**

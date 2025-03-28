@@ -14,7 +14,7 @@ trait CanValidate
     protected function validateEntity($entity)
     {
         $errors = Validation::createValidatorBuilder()
-            ->enableAnnotationMapping()
+            ->enableAttributeMapping()
             ->getValidator()
             ->validate($entity);
 
