@@ -1,5 +1,5 @@
 {
-    "name": "pz/doctrine-rest",
+    "name": "ekonoval/doctrine-rest",
     "description": "Rest API library for Doctrine 2 ORM",
     "keywords": ["doctrine", "rest"],
     "license": "MIT",
