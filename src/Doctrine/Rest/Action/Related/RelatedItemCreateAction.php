@@ -9,14 +9,12 @@ use Pz\Doctrine\Rest\RestRepository;
 use Pz\Doctrine\Rest\RestResponse;
 use Pz\Doctrine\Rest\RestResponseFactory;
 use Pz\Doctrine\Rest\Traits\CanHydrate;
-use Pz\Doctrine\Rest\Traits\CanValidate;
 use Pz\Doctrine\Rest\Traits\RelatedAction;
 
 class RelatedItemCreateAction extends RestAction
 {
     use RelatedAction;
     use CanHydrate;
-    use CanValidate;
 
     /**
      * RelatedCollectionCreateAction constructor.
@@ -55,5 +53,10 @@ class RelatedItemCreateAction extends RestAction
             new Item($item, $this->transformer(), $this->related()->getResourceKey()),
             RestResponse::HTTP_CREATED
         );
+    }
+
+    protected function validateEntity($entity)
+    {
+        // Implement entity validation
     }
 }

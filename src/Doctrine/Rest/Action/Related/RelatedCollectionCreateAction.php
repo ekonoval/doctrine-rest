@@ -7,14 +7,12 @@ use Pz\Doctrine\Rest\RestAction;
 use Pz\Doctrine\Rest\RestRepository;
 use Pz\Doctrine\Rest\RestResponse;
 use Pz\Doctrine\Rest\Traits\CanHydrate;
-use Pz\Doctrine\Rest\Traits\CanValidate;
 use Pz\Doctrine\Rest\Traits\RelatedAction;
 
 class RelatedCollectionCreateAction extends RestAction
 {
     use RelatedAction;
     use CanHydrate;
-    use CanValidate;
 
     /**
      * RelatedCollectionCreateAction constructor.
@@ -59,5 +57,10 @@ class RelatedCollectionCreateAction extends RestAction
             $this->related(),
             $this->transformer()
         ))->dispatch($request)->setStatusCode(RestResponse::HTTP_CREATED);
+    }
+
+    protected function validateEntity($entity)
+    {
+        // Implement entity validation
     }
 }

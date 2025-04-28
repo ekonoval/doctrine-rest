@@ -4,7 +4,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Pz\Doctrine\Rest\Contracts\JsonApiResource;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class User
@@ -27,8 +26,6 @@ class User implements JsonApiResource
      * @var string
      *
      * @ORM\Column(name="email", type="string", unique=true, nullable=false)
-     * @Assert\Email()
-     * @Assert\NotNull()
      */
     protected $email;
 
@@ -36,7 +33,6 @@ class User implements JsonApiResource
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255, nullable=false)
-     * @Assert\NotNull()
      */
     protected $name;
 

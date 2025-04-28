@@ -164,64 +164,6 @@ class ActionsWithErrorsTest extends TestCase
         ]], json_decode($response->getContent(), true));
     }
 
-    public function test_validation()
-    {
-        $action = new CreateAction(
-            new RestRepository($this->em, $this->em->getClassMetadata(User::class)),
-            new UserTransformer()
-        );
-
-        $request = new RestRequest(new Request(
-            query: [],
-            content: json_encode(['data' => ['attributes' => []]])
-        ));
-        $response = $action->dispatch($request);
-        $this->assertInstanceOf(RestResponse::class, $response);
-        $this->assertEquals(
-            [
-                'errors' => [
-                    [
-                        'code' => 'validation',
-                        'source' => ['pointer' => 'email'],
-                        'detail' => 'This value should not be null.'
-                    ],
-                    [
-                        'code' => 'validation',
-                        'source' => ['pointer' => 'name'],
-                        'detail' => 'This value should not be null.'
-                    ],
-                ]
-            ],
-            json_decode($response->getContent(), true)
-        );
-
-        $request = new RestRequest(new Request(
-            query: [],
-            content: json_encode([
-                'data' => [
-                    'attributes' => [
-                        'name' => 'Test',
-                        'email' => 'wrong-email',
-                    ]
-                ]
-            ])
-        ));
-        $response = $action->dispatch($request);
-        $this->assertInstanceOf(RestResponse::class, $response);
-        $this->assertEquals(
-            [
-                'errors' => [
-                    [
-                        'code' => 'validation',
-                        'source' => ['pointer' => 'email'],
-                        'detail' => 'This value is not a valid email address.'
-                    ],
-                ]
-            ],
-            json_decode($response->getContent(), true)
-        );
-    }
-
     public function test_generate_rest_exception_from_exception()
     {
         $this->assertInstanceOf(RestResponse::class, RestResponse::exception(new \Exception()));

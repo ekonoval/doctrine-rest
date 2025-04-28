@@ -3,9 +3,6 @@
 use Doctrine\Common\Util\ClassUtils;
 use Pz\Doctrine\Rest\Contracts\JsonApiResource;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\ConstraintViolation;
-use Symfony\Component\Validator\ConstraintViolationInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class RestException extends \Exception
 {
@@ -26,23 +23,6 @@ class RestException extends \Exception
 
         return static::create(Response::HTTP_INTERNAL_SERVER_ERROR, 'Internal Server Error', $exception)
             ->error('internal-error', [], $exception->getMessage(), $extra);
-    }
-
-    /**
-     * @param ConstraintViolationListInterface $errors
-     *
-     * @return RestException
-     */
-    public static function createFromConstraintViolationList(ConstraintViolationListInterface $errors)
-    {
-        $exception = static::createUnprocessable('Input validation errors.');
-
-        /** @var ConstraintViolationInterface $error */
-        foreach ($errors as $error) {
-            $exception->errorValidation($error->getPropertyPath(), $error->getMessage());
-        }
-
-        return $exception;
     }
 
     /**

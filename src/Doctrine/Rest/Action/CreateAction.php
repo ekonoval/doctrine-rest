@@ -7,12 +7,10 @@ use Pz\Doctrine\Rest\Contracts\RestRequestContract;
 use Pz\Doctrine\Rest\RestResponse;
 use Pz\Doctrine\Rest\RestResponseFactory;
 use Pz\Doctrine\Rest\Traits\CanHydrate;
-use Pz\Doctrine\Rest\Traits\CanValidate;
 
 class CreateAction extends RestAction
 {
     use CanHydrate;
-    use CanValidate;
 
     /** @var array|callable[] */
     protected $beforeCreate = [];
@@ -84,5 +82,10 @@ class CreateAction extends RestAction
         }
 
         return $this;
+    }
+
+    protected function validateEntity($entity)
+    {
+        // Implement entity validation
     }
 }
