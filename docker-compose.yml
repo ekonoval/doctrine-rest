@@ -5,5 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - .:/opt/project
-    user: '1000'
     command: ['composer', 'install']
+    # for manual debug
+    #command: ['tail', '-f', '/dev/null']
+
